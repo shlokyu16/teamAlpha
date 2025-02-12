@@ -13,7 +13,7 @@ DROWSY_LABELS = ['Sad', 'Neutral', 'Happy', 'Surprise']  # More weight on these 
 
 # Initialize dlib face detector and landmark predictor
 detector = dlib.get_frontal_face_detector()
-predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
+predictor = dlib.shape_predictor("./shape_predictor_68_face_landmarks.dat")
 
 def eye_aspect_ratio(eye):
     # Compute the eye aspect ratio (EAR) to detect blinking/drowsiness.
