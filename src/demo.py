@@ -14,7 +14,7 @@ DROWSY_LABELS = ['Sad', 'Neutral', 'Happy', 'Surprise']  # More weight on these 
 
 # Initialize dlib face detector and landmark predictor
 detector = dlib.get_frontal_face_detector()
-pp = os.path.join(os.getcwd(), "shape_predictor_68_face_landmarks.dat")
+pp = os.path.join(os.getcwd(), "src/shape_predictor_68_face_landmarks.dat")
 predictor = dlib.shape_predictor(pp)
 
 def eye_aspect_ratio(eye):
