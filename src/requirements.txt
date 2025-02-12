@@ -11,3 +11,7 @@ streamlit_webrtc==0.47.0
 av==10.0.0
 tensorflow-cpu==2.13.0
 streamlit
+tensorboard
+tensorboard-data-server
+tensorflow_decision_forests
+tensorflow-io-gcs-filesystem
