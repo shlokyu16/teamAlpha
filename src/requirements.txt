@@ -1,3 +1,4 @@
+wheel
 dlib
 joblib
 numpy
