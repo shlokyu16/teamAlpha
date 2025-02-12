@@ -1,9 +1,8 @@
-wheel
+cmake
 dlib
 joblib
 numpy
 opencv_python
-pyproject.toml
 scipy
 streamlit
 tensorflow
