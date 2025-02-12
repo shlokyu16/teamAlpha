@@ -6,6 +6,7 @@ import dlib
 from scipy.spatial import distance
 from collections import deque
 from tensorflow.keras.preprocessing.image import img_to_array
+import os
 
 # Emotion labels based on FER2013
 EMOTIONS = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
@@ -13,7 +14,8 @@ DROWSY_LABELS = ['Sad', 'Neutral', 'Happy', 'Surprise']  # More weight on these 
 
 # Initialize dlib face detector and landmark predictor
 detector = dlib.get_frontal_face_detector()
-predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
+pp = os.path.join(os.getcwd(), "shape_predictor_68_face_landmarks.dat")
+predictor = dlib.shape_predictor(pp)
 
 def eye_aspect_ratio(eye):
     # Compute the eye aspect ratio (EAR) to detect blinking/drowsiness.
