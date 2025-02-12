@@ -6,6 +6,7 @@ import dlib
 from scipy.spatial import distance
 from collections import deque
 from tensorflow.keras.preprocessing.image import img_to_array
+from tensorflow.keras.models import Sequential
 import os
 
 # Emotion labels based on FER2013
