@@ -1,12 +1,12 @@
 import streamlit as st
 import cv2
 import numpy as np
-import joblib
 import dlib
 from scipy.spatial import distance
 from collections import deque
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.models import Sequential
+from tensorflow.keras.models import load_model
 import os
 
 # Emotion labels based on FER2013
@@ -65,7 +65,7 @@ if choice == "Live Detection":
 
     # Load the trained model
     MODEL_PATH = os.path.join(os.getcwd(), "src/emotion_model.pkl")
-    model = joblib.load(MODEL_PATH)
+    model = load_model(MODEL_PATH, compile=False)
     
     st.write("Detects fatigue based on facial expressions and eye movement")
     cap = cv2.VideoCapture(0)
@@ -142,7 +142,7 @@ elif choice == "Upload Image":
 
     # Load the trained model
     MODEL_PATH = os.path.join(os.getcwd(), "src/emotion_model.pkl")
-    model = joblib.load(MODEL_PATH)
+    model = load_model(MODEL_PATH, compile=False)
 
     st.write("Upload an image for emotion detection")
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg", "pdf", ".heic"])
@@ -173,7 +173,7 @@ elif choice == "Upload Video":
 
     # Load the trained model
     MODEL_PATH = os.path.join(os.getcwd(), "src/emotion_model.pkl")
-    model = joblib.load(MODEL_PATH)
+    model = load_model(MODEL_PATH, compile=False)
 
     st.write("Upload a video for alertness analysis")
     uploaded_video = st.file_uploader("Choose a video...", type=["mp4", "avi", "mov"])
