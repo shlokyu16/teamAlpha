@@ -1,0 +1,7 @@
+dlib
+joblib
+numpy
+opencv_python
+scipy
+streamlit
+tensorflow
