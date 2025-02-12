@@ -4,10 +4,3 @@ libboost-all-dev
 freeglut3-dev
 cmake
 libopenblas-dev
-dlib
-joblib
-numpy
-opencv_python
-scipy
-streamlit
-tensorflow
