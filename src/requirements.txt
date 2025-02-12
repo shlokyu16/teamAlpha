@@ -1,11 +1,11 @@
 dlib-bin
 cmake
-joblib
+joblib==1.4.2
 numpy
 scipy
 streamlit
-tensorflow
-keras
+tensorflow==2.18.0
+keras==3.8.0
 opencv-contrib-python-headless
 streamlit_webrtc==0.47.0
 av==10.0.0
