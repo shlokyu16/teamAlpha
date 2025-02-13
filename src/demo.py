@@ -3,6 +3,7 @@ import cv2
 import numpy as np
 import dlib
 from scipy.spatial import distance
+import tensorflow as tf
 from collections import deque
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.models import Sequential
