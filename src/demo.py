@@ -12,19 +12,19 @@ import os
 
 def model_load():
     mp = os.path.join(os.getcwd(), "src/emotion_model.h5")
-    with open(mp, "r") as f:
-        model_config = json.load(f)
-
-    # Remove 'batch_shape' from the InputLayer config
-    for layer in model_config['config']['layers']:
-        if layer['class_name'] == 'InputLayer':
-            layer['config'].pop('batch_shape', None)  # Remove batch_shape
-
-    # Recreate the model from the modified config
-    model = tf.keras.models.model_from_json(json.dumps(model_config))
-
-    # Load weights separately
-    model.load_weights("emotion_model.h5", by_name=True)
+    
+    try:
+    model = load_model(mp, compile=False)  # Try loading normally
+    except TypeError as e:
+        # Load using `custom_objects` to avoid incompatible layers
+        model = load_model(
+            mp,
+            compile=False,
+            custom_objects={"InputLayer": tf.keras.layers.Input}  # Adjust InputLayer issues
+        )
+    model = tf.keras.models.load_model("emotion_model.keras")
+    model.save("emotion_model.h5")
+    model = load_model("emotion_model.h5")
     
     return model
 
