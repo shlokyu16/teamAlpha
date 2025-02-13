@@ -7,6 +7,7 @@ from scipy.spatial import distance
 from collections import deque
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.models import Sequential
+from tensorflow.keras.models import load_model
 
 # Emotion labels based on FER2013
 EMOTIONS = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
@@ -62,8 +63,8 @@ choice = st.sidebar.radio("Choose Mode:", tabs)
 if choice == "Live Detection":
 
     # Load the trained model
-    MODEL_PATH = "emotion_model.pkl"
-    model = joblib.load(MODEL_PATH)
+    MODEL_PATH = "emotion_model.h5"
+    model = load_model(MODEL_PATH)
     
     st.write("Detects fatigue based on facial expressions and eye movement")
     cap = cv2.VideoCapture(0)
@@ -139,8 +140,8 @@ if choice == "Live Detection":
 elif choice == "Upload Image":
 
     # Load the trained model
-    MODEL_PATH = "emotion_model.pkl"
-    model = joblib.load(MODEL_PATH)
+    MODEL_PATH = "emotion_model.h5"
+    model = load_model(MODEL_PATH)
 
     st.write("Upload an image for emotion detection")
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg", "pdf", ".heic"])
@@ -170,8 +171,8 @@ elif choice == "Upload Image":
 elif choice == "Upload Video":
 
     # Load the trained model
-    MODEL_PATH = "emotion_model.pkl"
-    model = joblib.load(MODEL_PATH)
+    MODEL_PATH = "emotion_model.h5"
+    model = load_model(MODEL_PATH)
 
     st.write("Upload a video for alertness analysis")
     uploaded_video = st.file_uploader("Choose a video...", type=["mp4", "avi", "mov"])
