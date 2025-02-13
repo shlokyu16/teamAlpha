@@ -64,7 +64,7 @@ choice = st.sidebar.radio("Choose Mode:", tabs)
 if choice == "Live Detection":
 
     # Load the trained model
-    MODEL_PATH = os.path.join(os.getcwd(), "src/emotion_model.pkl")
+    MODEL_PATH = os.path.join(os.getcwd(), "src/emotion_model.h5")
     model = load_model(MODEL_PATH, compile=False)
     
     st.write("Detects fatigue based on facial expressions and eye movement")
@@ -141,7 +141,7 @@ if choice == "Live Detection":
 elif choice == "Upload Image":
 
     # Load the trained model
-    MODEL_PATH = os.path.join(os.getcwd(), "src/emotion_model.pkl")
+    MODEL_PATH = os.path.join(os.getcwd(), "src/emotion_model.h5")
     model = load_model(MODEL_PATH, compile=False)
 
     st.write("Upload an image for emotion detection")
@@ -172,7 +172,7 @@ elif choice == "Upload Image":
 elif choice == "Upload Video":
 
     # Load the trained model
-    MODEL_PATH = os.path.join(os.getcwd(), "src/emotion_model.pkl")
+    MODEL_PATH = os.path.join(os.getcwd(), "src/emotion_model.h5")
     model = load_model(MODEL_PATH, compile=False)
 
     st.write("Upload a video for alertness analysis")
