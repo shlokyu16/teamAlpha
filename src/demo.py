@@ -65,7 +65,7 @@ if choice == "Live Detection":
 
     # Load the trained model
     MODEL_PATH = os.path.join(os.getcwd(), "src/emotion_model.h5")
-    model = load_model(MODEL_PATH, compile=False)
+    model = load_model(MODEL_PATH, compile=False, custom_objects={})
     
     st.write("Detects fatigue based on facial expressions and eye movement")
     cap = cv2.VideoCapture(0)
@@ -142,7 +142,7 @@ elif choice == "Upload Image":
 
     # Load the trained model
     MODEL_PATH = os.path.join(os.getcwd(), "src/emotion_model.h5")
-    model = load_model(MODEL_PATH, compile=False)
+    model = load_model(MODEL_PATH, compile=False, custom_objects={})
 
     st.write("Upload an image for emotion detection")
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg", "pdf", ".heic"])
@@ -173,7 +173,7 @@ elif choice == "Upload Video":
 
     # Load the trained model
     MODEL_PATH = os.path.join(os.getcwd(), "src/emotion_model.h5")
-    model = load_model(MODEL_PATH, compile=False)
+    model = load_model(MODEL_PATH, compile=False, custom_objects={})
 
     st.write("Upload a video for alertness analysis")
     uploaded_video = st.file_uploader("Choose a video...", type=["mp4", "avi", "mov"])
