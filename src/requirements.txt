@@ -4,8 +4,8 @@ joblib==1.4.2
 numpy
 scipy
 streamlit
-tensorflow
-keras
+tensorflow==2.10
+keras==2.10
 opencv-contrib-python-headless
 streamlit_webrtc==0.47.0
 av==10.0.0
