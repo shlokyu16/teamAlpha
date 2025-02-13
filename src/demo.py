@@ -7,7 +7,26 @@ from collections import deque
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.models import load_model
+import json
 import os
+
+model_load():
+    mp = os.path.join(os.getcwd(), "src/emotion_model.h5")
+    with open(mp, "r") as f:
+        model_config = json.load(f)
+
+    # Remove 'batch_shape' from the InputLayer config
+    for layer in model_config['config']['layers']:
+        if layer['class_name'] == 'InputLayer':
+            layer['config'].pop('batch_shape', None)  # Remove batch_shape
+
+    # Recreate the model from the modified config
+    model = tf.keras.models.model_from_json(json.dumps(model_config))
+
+    # Load weights separately
+    model.load_weights("emotion_model.h5", by_name=True)
+    
+    return model
 
 # Emotion labels based on FER2013
 EMOTIONS = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
@@ -64,8 +83,7 @@ choice = st.sidebar.radio("Choose Mode:", tabs)
 if choice == "Live Detection":
 
     # Load the trained model
-    MODEL_PATH = os.path.join(os.getcwd(), "src/emotion_model.h5")
-    model = load_model(MODEL_PATH)
+    model = model_load()
     
     st.write("Detects fatigue based on facial expressions and eye movement")
     cap = cv2.VideoCapture(0)
@@ -141,8 +159,7 @@ if choice == "Live Detection":
 elif choice == "Upload Image":
 
     # Load the trained model
-    MODEL_PATH = os.path.join(os.getcwd(), "src/emotion_model.h5")
-    model = load_model(MODEL_PATH)
+    model = model_load()
 
     st.write("Upload an image for emotion detection")
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg", "pdf", ".heic"])
@@ -172,8 +189,7 @@ elif choice == "Upload Image":
 elif choice == "Upload Video":
 
     # Load the trained model
-    MODEL_PATH = os.path.join(os.getcwd(), "src/emotion_model.h5")
-    model = load_model(MODEL_PATH)
+    model = model_load()
 
     st.write("Upload a video for alertness analysis")
     uploaded_video = st.file_uploader("Choose a video...", type=["mp4", "avi", "mov"])

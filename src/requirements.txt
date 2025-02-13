@@ -15,3 +15,4 @@ tensorboard
 tensorboard-data-server
 tensorflow_decision_forests
 tensorflow-io-gcs-filesystem
+json
