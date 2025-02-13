@@ -10,7 +10,7 @@ from tensorflow.keras.models import load_model
 import json
 import os
 
-model_load():
+def model_load():
     mp = os.path.join(os.getcwd(), "src/emotion_model.h5")
     with open(mp, "r") as f:
         model_config = json.load(f)
