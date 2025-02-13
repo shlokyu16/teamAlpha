@@ -14,7 +14,7 @@ def model_load():
     mp = os.path.join(os.getcwd(), "src/emotion_model.h5")
     
     try:
-    model = load_model(mp, compile=False)  # Try loading normally
+        model = load_model(mp, compile=False)  # Try loading normally
     except TypeError as e:
         # Load using `custom_objects` to avoid incompatible layers
         model = load_model(
