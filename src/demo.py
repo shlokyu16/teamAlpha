@@ -123,9 +123,10 @@ if tabp == "Empathy Check":
                     roi = np.expand_dims(roi, axis=0)
 
                     preds = model.predict(roi)[0]
+                    confidence = np.max(preds)
                     emotion = EMOTIONS[np.argmax(preds)]
 
-                    emotionp.write(f"Detected Emotion: {emotion}")
+                    emotionp.write(f"Emotion: {emotion} (Confidence: {confidence:.2%})")
 
                     if emotion in expected_emotion:
                         empathyp.success("Empathy detected!")
