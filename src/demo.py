@@ -49,22 +49,22 @@ if tabp == "Empathy Check":
 
     # Tabs for different content types
     tab1, tab2, tab3 = st.tabs(["Upload Image", "Upload Video", "Read Content"])
-    uploaded_content = None
+    uploaded_content = False
     expected_emotion = ""
 
     with tab1:
         st.header("Upload an Image")
         uploaded_image = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg"])
-        uploaded_content = uploaded_image
+        uploaded_content = True
 
         if uploaded_image is not None:
-            image = Image.open(uploaded_image)
-            st.image(image, caption="Uploaded Image", use_column_width=True)
+            image = cv2.imdecode(np.frombuffer(uploaded_image.read(), np.uint8), 1)
+            st.image(cv2.cvtColor(image, cv2.COLOR_BGR2RGB), channels="RGB")
 
     with tab2:
         st.header("Upload a Video")
         uploaded_video = st.file_uploader("Choose a video...", type=["mp4", "mov", "avi"])
-        uploaded_content = uploaded_video
+        uploaded_content = True
 
         if uploaded_video is not None:
             st.video(uploaded_video)
@@ -81,12 +81,13 @@ if tabp == "Empathy Check":
             else:
                 displayed_text = "Error"
                 
-        uploaded_content = uploaded_file
+        uploaded_content = True
         st.text_area("Content:", displayed_text, height=500)
 
     # Capture video feed
     cap = cv2.VideoCapture(0)
     emotion = ""
+
 
     # Expanded expected emotions dictionary with grouped emotions
     expected_emotions = {
@@ -107,13 +108,14 @@ if tabp == "Empathy Check":
     emotionp = st.empty()
     empathyp = st.empty()
 
-    if uploaded_content is not None:
+    if uploaded_content:
         while cap.isOpened():
             ret, frame = cap.read()
             if ret:
                 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
                 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
-                faces = face_cascade.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5)
+                faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=3, minSize=(30, 30), maxSize=(500, 500))
+
 
                 for (x, y, w, h) in faces:
                     roi_gray = gray[y:y+h, x:x+w]
