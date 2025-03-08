@@ -106,18 +106,18 @@ if tabp == "Empathy Check":
     with tab1:
         st.header("Upload an Image")
         uploaded_image = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg"])
-        uploaded_content = True
 
         if uploaded_image is not None:
+            uploaded_content = True
             image = cv2.imdecode(np.frombuffer(uploaded_image.read(), np.uint8), 1)
             st.image(cv2.cvtColor(image, cv2.COLOR_BGR2RGB), channels="RGB")
 
     with tab2:
         st.header("Upload a Video")
         uploaded_video = st.file_uploader("Choose a video...", type=["mp4", "mov", "avi"])
-        uploaded_content = True
 
         if uploaded_video is not None:
+            uploaded_content = True
             st.video(uploaded_video)
 
     with tab3:
@@ -126,13 +126,13 @@ if tabp == "Empathy Check":
         displayed_text = ""
         
         if uploaded_file is not None:
+            uploaded_content = True
             if uploaded_file.type == "application/pdf":
                 reader = PyPDF2.PdfReader(uploaded_file)
                 displayed_text = "\n".join([page.extract_text() for page in reader.pages if page.extract_text()])
             else:
                 displayed_text = "Error"
                 
-        uploaded_content = True
         st.text_area("Content:", displayed_text, height=500)
 
     # Capture video feed
@@ -160,7 +160,7 @@ if tabp == "Empathy Check":
     emotionp = st.empty()
     empathyp = st.empty()
 
-    if uploaded_content:
+    if uploaded_content == True:
         while cap.isOpened():
             ret, frame = cap.read()
             if ret:
